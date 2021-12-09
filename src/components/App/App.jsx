@@ -22,23 +22,12 @@ class App extends Component {
     return good + neutral + bad;
   };
 
-  countGood = () => {
-    this.setState(state => ({
-      good: state.good + 1,
+  onLeaveFeedback = options => {
+    this.setState(prevState => ({
+      [options]: prevState[options] + 1,
     }));
   };
 
-  countNeutral = () => {
-    this.setState(state => ({
-      neutral: state.neutral + 1,
-    }));
-  };
-
-  countbBad = () => {
-    this.setState(state => ({
-      bad: state.bad + 1,
-    }));
-  };
   countTotalFeedback = () => {
     const sum = this.state.good + this.state.neutral + this.state.bad;
     return sum;
@@ -49,9 +38,8 @@ class App extends Component {
       <div className="conteiner">
         <SectionTitle title="Please leave feedback" />
         <FeedbackOptions
-          countGood={this.countGood}
-          countNeutral={this.countNeutral}
-          countbBad={this.countbBad}
+          options={this.state}
+          onLeaveFeedback={this.onLeaveFeedback}
         />
         {this.countTotalFeedback() > 0 ? (
           <ul>

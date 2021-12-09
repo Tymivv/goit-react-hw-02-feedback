@@ -1,16 +1,21 @@
-const FeedbackOptions = ({ countGood, countNeutral, countbBad }) => {
-  return (
-    <>
-      <button className="btm" type="button" onClick={countGood}>
-        Good
+import PropTypes from 'prop-types';
+
+const FeedbackOptions = ({ options, onLeaveFeedback }) => (
+  <>
+    {Object.keys(options).map(option => (
+      <button
+        onClick={() => onLeaveFeedback(option)}
+        key={option}
+        type="button"
+      >
+        {option}
       </button>
-      <button className="btm" type="button" onClick={countNeutral}>
-        Neutral
-      </button>
-      <button className="btm" type="button" onClick={countbBad}>
-        Bad
-      </button>
-    </>
-  );
+    ))}
+  </>
+);
+
+FeedbackOptions.propTypes = {
+  onLeaveFeedback: PropTypes.func,
 };
+
 export default FeedbackOptions;
